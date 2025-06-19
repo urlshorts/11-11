@@ -1,0 +1,12 @@
+{
+  "name": "daily-telegram-bot",
+  "version": "1.0.0",
+  "description": "بوت تيليجرام يرسل رسالة يومية تلقائيًا",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "node-telegram-bot-api": "^0.61.0"
+  }
+}
