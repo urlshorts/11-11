@@ -1,34 +1,24 @@
-name: Daily Telegram Message  # اسم العملية التي ستظهر في GitHub
+name: Daily Telegram Message
 
 on:
   schedule:
-    - cron: '11 20 * * *'     # وقت التشغيل: كل يوم الساعة 20:11 بتوقيت UTC = 11:11 مساء بتوقيت السعودية
-  workflow_dispatch:          # خيار لتشغيل البوت يدويًا من GitHub
+    - cron: '11 20 * * *' # 11:11 مساءً بتوقيت السعودية (UTC+3)
+  workflow_dispatch:
 
 jobs:
-  send-message:               # اسم المهمة
-    runs-on: ubuntu-latest    # نظام التشغيل الذي سيشغل الكود (خادم GitHub)
-
-    steps:                    # الخطوات التي سيتم تنفيذها
+  send-message:
+    runs-on: ubuntu-latest
+    steps:
       - name: Checkout repo
         uses: actions/checkout@v3
-        # تحميل ملفات المشروع من GitHub
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '20'
-        # إعداد بيئة Node.js
 
       - name: Install dependencies
         run: npm install
-        # تثبيت المكتبات التي يحتاجها المشروع (مثل node-telegram-bot-api)
 
       - name: Run bot message sender
         run: MODE=cron node index.js
-        # تشغيل السكربت `index.js` مع إعطائه متغير MODE=cron
-
-        env:
-          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
-          CHAT_ID: ${{ secrets.CHAT_ID }}
-        # تمرير توكن البوت ومعرف الكروب من الإعدادات السرية في GitHub
